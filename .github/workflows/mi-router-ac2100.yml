@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build Lean_LEDE_Redmi_AC2100
+name: Build mi-router-ac2100
 
 on:
   repository_dispatch:
