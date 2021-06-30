@@ -20,6 +20,7 @@ sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
 sed -i '$a src-git passwall https://github.com/xiaorouji/openwrt-passwall' feeds.conf.default
 sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+sed -i '$a src-git btmod  https://github.com/sirpdboy/luci-theme-btmod' feeds.conf.default
 
 git clone https://github.com/garypang13/luci-app-bypass.git package/luci-app-bypass
 git clone https://github.com/garypang13/smartdns-le package/smartdns-le
@@ -27,7 +28,7 @@ wget -P package/lua-maxminddb https://raw.githubusercontent.com/garypang13/openw
 wget -P package/redsocks2 https://raw.githubusercontent.com/coolsnowwolf/lede/master/package/lean/redsocks2/Makefile
 find package/*/ feeds/*/ -maxdepth 2 -path "*luci-app-bypass/Makefile" | xargs -i sed -i 's/shadowsocksr-libev-ssr-redir/shadowsocksr-libev-alt/g' {}
 find package/*/ feeds/*/ -maxdepth 2 -path "*luci-app-bypass/Makefile" | xargs -i sed -i 's/shadowsocksr-libev-ssr-server/shadowsocksr-libev-server/g' {}
-#sed -i '$a src-git sirpdboypackage https://github.com/siropboy/sirpdboy-package' feeds.conf.default
+#sed -i '$a src-git sirpdboypackage https://github.com/siropboy/mypackages' feeds.conf.default
 #sed -i '$a src-git bypass https://github.com/garypang13/luci-app-bypass' feeds.conf.default
 # Define My Package
 #git clone https://github.com/vernesong/OpenClash package/molun/luci-app-openclash
