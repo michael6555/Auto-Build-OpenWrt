@@ -36,7 +36,6 @@ git clone https://github.com/project-lede/luci-app-godproxy.git package/luci-app
 git clone https://github.com/sirpdboy/luci-theme-btmod.git package/luci-theme-btmod
 git clone https://github.com/garypang13/luci-theme-edge.git package/luci-theme-edge
 git clone https://github.com/siropboy/mypackages.git package/mypackages
-git clone https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
 
 # Add a feed source
 #sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
