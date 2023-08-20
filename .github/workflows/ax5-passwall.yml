@@ -16,7 +16,7 @@ on:
 
 
 env:
-  REPO_URL: https://github.com/michael655/openwrt-gl-ax1800
+  REPO_URL: https://github.com/michael6555/openwrt-gl-ax1800
 
 #  REPO_URL: https://github.com/jwkinko/openwrt-gl-ax1800
   REPO_BRANCH: master
