@@ -1,54 +1,29 @@
-#!/bin/bash
+# Modify Default IP
+sed -i 's/192.168.1.1/192.168.12.13/g' package/base-files/files/bin/config_generate
 #
-# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
+# 修改连接数
+#sed -i 's/net.netfilter.nf_conntrack_max=.*/net.netfilter.nf_conntrack_max=65535/g' package/kernel/linux/files/sysctl-nf-conntrack.conf
 #
-# This is free software, licensed under the MIT License.
-# See /LICENSE for more information.
+# 修正连接数
+#sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=65535' package/base-files/files/etc/sysctl.conf
 #
-# https://github.com/P3TERX/Actions-OpenWrt
-# File name: diy-part2.sh
-# Description: OpenWrt DIY script part 2 (After Update feeds)
+# OpenWrt Themes
+#git clone https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
+#git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
+#git clone https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
 #
+# Add Netdata
+git clone https://github.com/sirpdboy/luci-app-netdata.git package/luci-app-netdata
+#
+#添加额外非必须软件包
+git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/luci-app-adguardhome
+#git clone https://github.com/vernesong/OpenClash.git package/OpenClash
+#git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
+#git clone https://github.com/zzsj0928/luci-app-pushbot.git package/luci-app-pushbot
 
-# Custom configuration
-# 修改内核4.19
-# sed -i 's/KERNEL_PATCHVER:=5.4/KERNEL_PATCHVER:=4.19/g' target/linux/x86/Makefile
-# sed -i 's/KERNEL_TESTING_PATCHVER:=5.4/KERNEL_TESTING_PATCHVER:=4.19/g' target/linux/x86/Makefile
+#
+#添加smartdns
+git clone https://github.com/kiddin9/luci-app-dnsfilter.git package/luci-app-dnsfilter
 
-# 修改openwrt登陆地址,把下面的192.168.6.1修改成你想要的就可以了
-sed -i 's/192.168.1.1/192.168.1.1/g' package/base-files/files/bin/config_generate
-
-# 修改主机名字，把OpenWrt-1.0修改你喜欢的就行（不能纯数字或者使用中文）
-sed -i '/uci commit system/i\uci set system.@system[0].hostname='Michael_OpenWrt'' package/lean/default-settings/files/zzz-default-settings
-
-# 版本号里显示一个自己的名字（Lan build $(TZ=UTC-8 date "+%Y.%m.%d") @ 这些都是后增加的）
-sed -i "s/OpenWrt /Michale655 build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
-      
-# 修改argon为默认主题,可根据你喜欢的修改成其他的（不选择那些会自动改变为默认主题的主题才有效果）
-sed -i 's/luci-theme-btmod/luci-theme-edge' feeds/luci/collections/luci/Makefile
-# 设置密码为空（安装固件时无需密码登陆，然后自己修改想要的密码）
-# sed -i 'conG860416' package/lean/default-settings/files/zzz-default-settings
-
-# 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
-sed -i 's/"网络存储"/"存储"/g' package/lean/luci-app-vsftpd/po/zh-cn/vsftpd.po
-sed -i 's/"网络存储"/"存储"/g' package/lean/luci-app-usb-printer/po/zh-cn/usb-printer.po
-sed -i 's/"BaiduPCS Web"/"百度网盘"/g' package/lean/luci-app-baidupcs-web/luasrc/controller/baidupcs-web.lua
-sed -i 's/"带宽监控"/"带宽"/g' feeds/luci/applications/luci-app-nlbwmon/po/zh-cn/nlbwmon.po
-sed -i 's/"实时流量监测"/"流量"/g' package/lean/luci-app-wrtbwmon/po/zh-cn/wrtbwmon.po
-
-# 修改bypass支持lean源码shadowsocksr-libev-ssr-redir/server重命名
-# find package/*/ feeds/*/ -maxdepth 5 -path "*luci-app-bypass/Makefile" | xargs -i sed -i 's/shadowsocksr-libev-ssr-redir/shadowsocksr-libev-alt/g' {}
-# find package/*/ feeds/*/ -maxdepth 5 -path "*luci-app-bypass/Makefile" | xargs -i sed -i 's/shadowsocksr-libev-ssr-server/shadowsocksr-libev-server/g' {}
-
-# 修改bypass依赖为smartdns支持
-# find package/*/ feeds/*/ -maxdepth 5 -path "*luci-app-bypass/Makefile" | xargs -i sed -i 's/smartdns-le/smartdns/g' {}
-
-# Add kernel build user
-[ -z $(grep "CONFIG_KERNEL_BUILD_USER=" .config) ] &&
-    echo 'CONFIG_KERNEL_BUILD_USER="P3TERX"' >>.config ||
-    sed -i 's@\(CONFIG_KERNEL_BUILD_USER=\).*@\1$"Michael655"@' .config
-
-# Add kernel build domain
-[ -z $(grep "CONFIG_KERNEL_BUILD_DOMAIN=" .config) ] &&
-    echo 'CONFIG_KERNEL_BUILD_DOMAIN="GitHub Actions"' >>.config ||
-    sed -i 's@\(CONFIG_KERNEL_BUILD_DOMAIN=\).*@\1$"GitHub Actions"@' .config
+git clone https://github.com/pymumu/openwrt-smartdns package/smartdns
+git clone -b lede https://github.com/pymumu/luci-app-smartdns.git package/luci-app-smartdns
