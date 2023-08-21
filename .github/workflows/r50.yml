@@ -26,7 +26,7 @@ on:
 
 env:
   REPO_URL: https://github.com/michael6555/openwrt-gl-ax1800
-  REPO_BRANCH: main
+  REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: r50.config
   DIY_P1_SH: diy-part1.sh
@@ -43,10 +43,14 @@ jobs:
   build:
     runs-on: ubuntu-20.04
 
+    jobs:
+  build:
+    runs-on: ubuntu-22.04
+
     steps:
-    - name: 准备结束
+    - name: Checkout
       uses: actions/checkout@main
-      
+
     - name: Check server configuration
       run: |
         echo "警告⚠"
@@ -64,7 +68,6 @@ jobs:
         echo -e  "硬盘数量：$(ls /dev/sd* | grep -v [1-9] | wc -l) \n"
         echo "硬盘详情："
         df -Th
-    
     - name: 初始化环境
       env:
         DEBIAN_FRONTEND: noninteractive
