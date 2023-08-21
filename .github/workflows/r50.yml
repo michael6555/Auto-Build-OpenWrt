@@ -13,7 +13,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: 开始编译openclash版本
+name: Redmi_R50_版本
 
 on:
   repository_dispatch:
