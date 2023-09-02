@@ -14,9 +14,10 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
-echo 'src-git openwrt-packages https://github.com/Lienol/openwrt-packages' >>feeds.conf.default
-# echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
-# echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
+#echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
+echo 'src-git opentopd  https://github.com/sirpdboy/sirpdboy-package' >>feeds.conf.default
+echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
+echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
 # 添加插件源码
 sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 # passwall依赖
@@ -28,3 +29,6 @@ sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 #echo 'src-git small8 https://github.com/kenzok8/small-package' >>feeds.conf.default
 #echo 'src-git Boos4721 https://github.com/Boos4721/OpenWrt-Packages' >>feeds.conf.default
 #echo 'src-git fichenx https://github.com/fichenx/openwrt-package' >>feeds.conf.default
+
+./scripts/feeds update istore
+./scripts/feeds install -d y -p istore luci-app-store
